@@ -1,13 +1,8 @@
 {
   "message": "Host failed assurance policy",
+  "alias": "{{.event.Resolve "$.hostname"}}",
 
-{{if (.event.Resolve "$.containername")}}
-  "alias": "{{.event.Resolve "$.containername"}}",
-{{else}}
-  "alias": "{{.event.Resolve "$.imagename"}}",
-{{end}}
-
-  "description":"Container {{.event.Resolve "$.userid"}} performed  {{.event.Resolve "$.category"}} {{.event.Resolve "$.action"}} on host {{.event.Resolve "$.hostname"}}",
+  "description":"Host {{.event.Resolve "$.userid"}}  {{.event.Resolve "$.hostname"}} failed to pass assurance policy",
 
 {{if .responders}}
   "responders":[
