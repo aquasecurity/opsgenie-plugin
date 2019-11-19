@@ -2,8 +2,10 @@
 
 {{if (.event.Resolve "$.imagehash")}}
   "message": "Image scan results",
+  "description":"Image scan for image {{.event.Resolve "$.imagename"}} reveled vulnerabilities",
+
 {{else}}
-  "message": "Host scan results",
+  "message": "Host scan for host {{.event.Resolve "$.hostname"}} reveled vulnerabilities",
 {{end}}
 
 
@@ -13,8 +15,7 @@
   "alias": "{{.event.Resolve "$.imagename"}}",
 {{end}}
 
-  "description":"Container {{.event.Resolve "$.userid"}} performed  {{.event.Resolve "$.category"}} {{.event.Resolve "$.action"}} on host {{.event.Resolve "$.hostname"}}",
-
+ 
 {{if .responders}}
   "responders":[
     {{.responders}}
