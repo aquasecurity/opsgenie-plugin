@@ -9,19 +9,19 @@
 
 {
 {{if eq (.event.Resolve "$.result") 2}}
-   $eventaction := "blocked",
+   {{$eventaction := "blocked"}}
 {{else if eq (.event.Resolve "$.result") 3}}
-    $eventaction := "detected",
+   {{$eventaction := "detected"}}
 {{else}}
-    $eventaction := "detected",
+   {{$eventaction := "detected"}}
 {{end}}
 
 {{if eq (.event.Resolve "$.action) "exec"}}
-   "message" : "Unauorized file execution {{$$eventaction}}"
+   "message" : "Unauorized file execution {{$$eventaction}}",
    "Description": "User {{$user}} performed unauthorized file exec ({{$resource}}) on host {{$host}}. Action {{$$eventaction}}",
 {{else if eq (.event.Resolve "$.category) "network"}}
-   "message" : "Unauorized network activity {{$$eventaction}}"
-   "Description": "User {{$user} performed unauthorized network connection with resource {{$resource}} on cntainer {{$container}} on host {{$host}}. Action {{$$eventaction}}",
+   "message" : "Unauorized network activity {{$$eventaction}}",
+   "Description": "User {{$user} performed unauthorized network connection with resource {{$resource}} on cntainer {{$container}} on host {{$host}}, Action {{$$eventaction}}",
 {{else}}
    "message": "Runtime container alert (category: {{.event.Resolve "$.category"}}, result: {{.event.Resolve "$.result"}})",
    "Description": "User {{$user} performed unauthorized runtime activity with resource {{$resource}} on cntainer {{$container}} on host {{$host}}",
@@ -32,8 +32,6 @@
 {{else}}
   "alias": "{{.event.Resolve "$.imagename"}}",
 {{end}}
-
-  "description":"Container {{.event.Resolve "$.userid"}} performed  {{.event.Resolve "$.category"}} {{.event.Resolve "$.action"}} on host {{.event.Resolve "$.hostname"}}",
 
 {{if .responders}}
   "responders":[
