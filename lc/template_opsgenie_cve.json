@@ -1,0 +1,59 @@
+{
+
+{{if (.event.Resolve "$.imagehash")}}
+  "message": "Image scan results",
+{{else}}
+  "message": "Host scan results",
+{{end}}
+
+
+{{if (.event.Resolve "$.containername")}}
+  "alias": "{{.event.Resolve "$.containername"}}",
+{{else}}
+  "alias": "{{.event.Resolve "$.imagename"}}",
+{{end}}
+
+  "description":"Container {{.event.Resolve "$.userid"}} performed  {{.event.Resolve "$.category"}} {{.event.Resolve "$.action"}} on host {{.event.Resolve "$.hostname"}}",
+
+{{if .responders}}
+  "responders":[
+    {{.responders}}
+  ],
+{{end}}
+
+{{if .visibleTo}}
+  "visibleTo":[
+    {{.visibleTo}}
+  ],
+{{end}}
+
+{{if .user}}
+  "user": "{{.user}}",
+{{end}}
+
+{{if .entity}}
+  "entity": "{{.entity}}",
+{{end}}
+
+{{if .source}}
+  "source": "{{.source}}",
+{{end}}
+
+{{if .event.Resolve "$.data"}}
+{{$keys := (keysSlice (.event.Resolve "$.data"))}}
+{{$lastIndex := (sub (len $keys) 1)}}
+{{$eventVar := .event}}
+  "details":{
+{{range $index, $key := $keys}}
+{{$path := (printf "$.data.%s" $key)}}
+    "{{$key}}": "{{js ($eventVar.ResolveAsString $path)}}"{{if ne $lastIndex $index}},{{end}}
+{{end}}
+  },
+{{end}}
+
+{{if eq (.event.Resolve "$.result") 4}}
+  "priority":"P2"
+{{else}}
+  "priority":"P3"
+{{end}}
+}

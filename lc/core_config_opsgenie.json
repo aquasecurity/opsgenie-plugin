@@ -1,0 +1,101 @@
+{
+  "input": {
+    "type": "sql",
+    "properties": {
+      "connectionString": "",
+      "host": "",
+      "port": 0,
+      "database": "",
+      "username": "",
+      "password": "",
+      "table": "",
+      "orderColumn": "id",
+      "where": "((type='Docker' and result>1 and category='image') or (type='Runtime' and result>1)  or (type='CVE' and result>1 and category='CVE') or (userid='image.policy' and result>1 and action='policy.failure') or (userid='host.policy' and result>1 and action='policy.failure'))",
+      "selectInterval": 2000,
+      "selectLimit": 1,
+      "ensureConsistency": true
+    }
+  },
+  "filter": {
+    "type": "nop",
+    "properties": {
+      "blackList": {
+        "$.type": "^test$"
+      }
+    }
+  },
+  "output": {
+    "pollingInterval": 1000,
+    "type": "opsgenie",
+    "properties": {
+      "opsGenieApiAlertUrl": "",
+      "opsGenieApiKey": "",
+      "opsGenieApiAuthHeaderPrefix": "GenieKey ",
+      "alertEntity": "aqua",
+      "alertResponders": "{\"username\":\"your.email@mail.com\", \"type\":\"user\"}",
+      "alertSource": "test source",
+      "alertUser": "alert owner",
+      "alertVisibleTo": "{\"username\":\"your.email@mail.com\", \"type\":\"user\"}",
+      "stub": false,
+      "converter": [
+        {
+          "path": "$.type",
+          "value": "Docker",
+          "template": "app/config/template_opsgenie_docker.json"
+        },
+        {
+          "path": "$.type",
+          "value": "Runtime",
+          "template": "app/config/template_opsgenie_runtime.json"
+        },
+        {
+          "path": "$.type",
+          "value": "CVE",
+          "template": "app/config/template_opsgenie_cve.json"
+        },
+        {
+          "path": "$.userid",
+          "value": "image.policy",
+          "template": "app/config/template_opsgenie_imagepolicy.json"
+        },
+        {
+          "path": "$.userid",
+          "value": "host.policy",
+          "template": "app/config/template_opsgenie_hostpolicy.json"
+        },
+        {
+          "template": "app/config/template_opsgenie_default.json"
+        }
+      ]
+    }
+  },
+  "common": {
+    "storage": {
+      "type": "sql",
+      "properties": {
+        "connectionString": "",
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "table": "",
+        "allowAutoCreate": true
+      }
+    },
+    "buffer": {
+      "size": 10000000,
+      "transactionSizeLimit": 100,
+      "logEvictedEvents": true,
+      "bufferSizeThresholdBusy": 0.75
+    },
+    "metrics": {
+      "prometheus": {
+        "enable": true,
+        "namespace": "logcollector",
+        "pattern": "/metrics",
+        "address": "localhost:8888"
+      }
+    }
+  }
+}
