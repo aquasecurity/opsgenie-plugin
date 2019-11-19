@@ -7,7 +7,7 @@
   "alias": "{{.event.Resolve "$.imagename"}}",
 {{end}}
 
-  "description":"Container {{.event.Resolve "$.userid"}} performed  {{.event.Resolve "$.category"}} {{.event.Resolve "$.action"}} on host {{.event.Resolve "$.hostname"}}",
+  "description":"Image {{.event.Resolve "$.imagename"}} failed to pass assurance policy",
 
 {{if .responders}}
   "responders":[
