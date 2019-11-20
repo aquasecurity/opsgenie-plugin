@@ -79,7 +79,7 @@
         "database": "",
         "username": "",
         "password": "",
-        "table": "",
+        "table": "opsginie_table",
         "allowAutoCreate": true
       }
     },
