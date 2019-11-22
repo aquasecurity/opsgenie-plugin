@@ -44,9 +44,7 @@ kubectl create secret -n <aqua namespace> generic lc-secrets --from-literal=opsg
 ```
 kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file=./lc/
 ```	
-5. Configure OpsGenie behavior be editing the Kubernetes deployment yaml template
-
-Copy opsgenie_deployment_template.yaml to opsgenie_deployment.yaml and change the following parameters -
+5. Configure OpsGenie behavior by editing the Kubernetes deployment yaml template. Copy *opsgenie_deployment_template.yaml* to *opsgenie_deployment.yaml* and change the following parameters -
 
 Context|Field|Description
 -------|-----|-----------
@@ -58,7 +56,7 @@ Database|*COMMON_STORAGE_PROPERTIES_HOST*|Point to Aqua's DB service
 OpsGenie|*OUTPUT_PROPERTIES_ALERTRESPONDERS*|Set OpsGenie *Responders* field *(see at https://docs.opsgenie.com/docs/alert-api)*
 OpsGenie|*OUTPUT_PROPERTIES_ALERTVISIBLETO*|Set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
 
-6. Push the OpsGeini plug-in to the cluster :
+6. Push the OpsGeini plugin to the cluster :
 ```
 kubectl create -f opsgenie_deployment.yaml
 ```	
