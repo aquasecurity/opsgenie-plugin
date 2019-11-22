@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aqua-lc-opsgenie
+  namespace: aqua        # change to Aqua CSP namespace
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+       app: aqua-lc-opsgenie
+  template:
+    metadata:
+       labels:
+         app: aqua-lc-opsgenie
+    spec:
+      serviceAccount: aqua-sa     # change to Aqua CSP service account
+      imagePullSecrets:
+      - name: aqua-registry
+      restartPolicy: Always
+      containers:
+      - name: aqua-lc-opsgenie
+        image: aquasec/log-collector:latest
+        imagePullPolicy: IfNotPresent
+        env:
+  #Aqua Connection properties
+        - name: "INPUT_PROPERTIES_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: "aqua-db"     # change to Aqua CSP database secret name 
+              key: "password"
+        - name: "INPUT_PROPERTIES_USERNAME"
+          value: "postgres"
+        - name: "INPUT_PROPERTIES_DATABASE"
+          value: "slk_audit"
+        - name: "INPUT_PROPERTIES_HOST"
+          value: "aqua-db"       # change to Aqua Database service 
+        - name: "INPUT_PROPERTIES_PORT"
+          value: "5432"
+        - name: "INPUT_PROPERTIES_TABLE"
+          value: "audit"
+#Common Connection properties
+        - name: "COMMON_STORAGE_PROPERTIES_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: "aqua-db" # change to Aqua CSP database secret name
+              key: "password"
+        - name: "COMMON_STORAGE_PROPERTIES_USERNAME"
+          value: "postgres"
+        - name: "COMMON_STORAGE_PROPERTIES_DATABASE"
+          value: "logcollector"
+        - name: "COMMON_STORAGE_PROPERTIES_HOST" 
+          value: "aqua-db"  # change to Aqua Database service
+        - name: "COMMON_STORAGE_PROPERTIES_PORT"
+          value: "5432"
+        - name: "COMMON_STORAGE_PROPERTIES_TABLE"
+          value: "logcollector_opsgenie5_storage"
+        - name: "COMMON_STORAGE_PROPERTIES_CONNECTIONSTRING"
+#         value: "postgresql://$(COMMON_STORAGE_PROPERTIES_HOST):$(COMMON_STORAGE_PROPERTIES_PORT)/$(COMMON_STORAGE_PROPERTIES_DATABASE)?user=$(COMMON_STORAGE_PROPERTIES_USERNAME)&password=$(COMMON_STORAGE_PROPERTIES_PASSWORD)&sslmode=disable"
+#Opsgenie Connection properties
+        - name: "OUTPUT_PROPERTIES_OPSGENIEAPIKEY"
+          valueFrom:
+            secretKeyRef:
+              name: "lc-secrets"
+              key: "opsgenie-apikey"
+#         value: "41094637-4f91-4a72-aa0d-06cd29c8432f"
+        - name: "OUTPUT_PROPERTIES_OPSGENIEAPIALERTURL"
+          value: "https://api.opsgenie.com/v2/alerts"
+          ##
+          ## Set OpsGenie Alret Responders value (as in https://docs.opsgenie.com/docs/alert-api)
+          ##  
+        - name: "OUTPUT_PROPERTIES_ALERTRESPONDERS"
+          value: "{\"username\":\"responder1@email.com\", \"type\":\"user\"},{\"username\":\"responder2@email.com\", \"type\":\"user\"}"
+        
+          ##
+          ## Set OpsGenie Alret Visible To  value (as in https://docs.opsgenie.com/docs/alert-api)
+          ##
+        - name: "OUTPUT_PROPERTIES_ALERTVISIBLETO"
+          value: "{\"username\":\"visibleto@email.com\", \"type\":\"user\"}"
+        - name: "OUTPUT_PROPERTIES_ALERTUSER"
+          value: "Aqua CSP"
+        - name: "OUTPUT_PROPERTIES_ALERTSOURCE"
+          value: "Aqua CSP"
+        - name: "OUTPUT_PROPERTIES_ALERTENTITY"
+          value: "Aqua CSP"
+#Core config mount and path
+        - name: "CORE_CONFIG"
+          value: "/app/config/core_config_opsgenie.json"
+        volumeMounts:
+          - mountPath: /app/config
+            name: lc-opsgenie-config
+      volumes:
+        - name: lc-opsgenie-config
+          configMap:
+            name: aqua-lc-opsgenie-config
