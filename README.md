@@ -1,4 +1,4 @@
-# AWS Security OpsGenie Plugin
+# Aqua OpsGenie Plugin
 ## Send Aqua's security issues to OpsGenie
 
 > _OpsGenie Plugin is compatible with Aqua Cloud Native Security Platform 4.x_
