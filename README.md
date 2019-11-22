@@ -45,16 +45,16 @@ kubectl create secret -n <aqua namespace> generic lc-secrets --from-literal=opsg
 kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file=./lc/
 ```	
 5. Configure OpsGenie behavior be editing the Kubernetes deployment yaml template -
-- Copy opsgenie_deployment_template.yaml to opsgenie_deployment.yaml and change the following parameters -
-- *namespace* - use Aqua's namespace
-- *service account* - use Aqua's service account
-#### Database configuration 
-- *INPUT_PROPERTIES_PASSWORD* - point to Aqua's db password secret
-- *INPUT_PROPERTIES_HOST* - point to the Aqua's DB service
-- *COMMON_STORAGE_PROPERTIES_HOST* - point to Aqua's DB service
-#### OpsGenie configurations
-- *OUTPUT_PROPERTIES_ALERTRESPONDERS* - set opsGenie *Responders* field *(see at https://docs.opsgenie.com/docs/alert-api)*
-- *OUTPUT_PROPERTIES_ALERTVISIBLETO* - set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
+Copy opsgenie_deployment_template.yaml to opsgenie_deployment.yaml and change the following parameters -
+Context|Field|Description
+-------|-----|-----------
+Cluster|*namespace*|Use Aqua's namespace
+Cluster|*service account|Use Aqua's service account
+Database|*INPUT_PROPERTIES_PASSWORD*|Point to Aqua's db password secret
+Database|*INPUT_PROPERTIES_HOST*|Point to the Aqua's DB service
+Database|*COMMON_STORAGE_PROPERTIES_HOST*|Point to Aqua's DB service
+OpsGenie|*OUTPUT_PROPERTIES_ALERTRESPONDERS*|Set OpsGenie *Responders* field *(see at https://docs.opsgenie.com/docs/alert-api)*
+OpsGenie|*OUTPUT_PROPERTIES_ALERTVISIBLETO*|Set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
 
 6. Push the OpsGeini plug-in to the cluster :
 ```
