@@ -44,8 +44,10 @@ kubectl create secret -n <aqua namespace> generic lc-secrets --from-literal=opsg
 ```
 kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file=./lc/
 ```	
-5. Configure OpsGenie behavior be editing the Kubernetes deployment yaml template -
+5. Configure OpsGenie behavior be editing the Kubernetes deployment yaml template
+
 Copy opsgenie_deployment_template.yaml to opsgenie_deployment.yaml and change the following parameters -
+
 Context|Field|Description
 -------|-----|-----------
 Cluster|*namespace*|Use Aqua's namespace
