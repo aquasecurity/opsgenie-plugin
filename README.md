@@ -7,15 +7,15 @@
 The OpsGenie plugin extends Aqua CSP with the ability to open tickets in your OpsGenie account. The plugin is delivered as an image that should be pushed into the Aqua CSP Kubernetes cluster. Configuring the plug-in is done through the deployment yaml file. 
 
 ### Tickets types sent to OpsGenie -
-Aqua opens the following security ticket types -
+Aqua opens the following security ticket types:
 
+Context|Ticket type
 ----|-------
 Scanning and vulnerabilities management|Images that failed the security scans and are non-compliant
-Scanning and vulnerabilities management|Hosts  that failed the security scans and are non-compliant
+Scanning and vulnerabilities management|Hosts that failed the security scans and are non-compliant
 Assurance Gateway|Attempts to push non-complaint or unregistered images to the runtime environment
 Runtime incidents|Suspicious or unauthorized activity in the container
 Runtime incidents|Suspicious or unauthorized network activity at a container level
-----|-------
 
 _Example: Image Failed Assurance Policy_
 ![CloudFormation](/images/cloudformation.jpg)
