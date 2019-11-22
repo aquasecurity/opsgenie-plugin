@@ -13,9 +13,9 @@ Context|Ticket type
 ----|-------
 Scanning|Images that failed the security scans and are non-compliant
 Scanning|Hosts that failed the security scans and are non-compliant
-Assurance Gateway|Attempts to push non-complaint or unregistered images to the cluster
-Runtime incidents|Suspicious or unauthorized activity in a container
-Runtime incidents|Suspicious or unauthorized network activity at a container level
+Assurance|Attempts to push non-complaint or unregistered images to the cluster
+Runtime|Suspicious or unauthorized activity in a container
+Runtime|Suspicious or unauthorized network activity at a container level
 
 _Example: Image Failed Assurance Policy_
 ![CloudFormation](/images/cloudformation.jpg)
