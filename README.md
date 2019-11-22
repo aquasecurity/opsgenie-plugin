@@ -17,7 +17,7 @@ Assurance|Attempts to push non-complaint or unregistered images to the cluster
 Runtime|Suspicious or unauthorized activity in a container
 Runtime|Suspicious or unauthorized network activity at a container level
 
-_Example: Image Failed Assurance Policy_
+_Example: Host Failed Assurance Policy_
 ![Host ticket](/images/imagefailed.jpg)
 
 _Example: Unauthorized File Execution Detected_
