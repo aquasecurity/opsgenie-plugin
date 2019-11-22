@@ -34,13 +34,13 @@ _Example: Unauthorized File Execution Detected_
 ```
 git clone git@github.com:aquasecurity/opsgenie-plugin.git|
 ```
-2. You can changes the default tickets language in the template files at */<repo>/lc*
+2. You can changes the default tickets language in the template files at **./lc/**
 
-3. Create a new *secret* to hold the OpsGenie API Key code
+3. Create a new **secret** to hold the OpsGenie API Key code
 ```
 kubectl create secret -n <aqua namespace> generic lc-secrets --from-literal=opsgenie-apikey=<opsgenie-integration-key>
 ```  
-4. Create a *configmap* from the local messages and configurations
+4. Create a **configmap** from the local messages and configurations
 ```
 kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file=./lc/
 ```	
@@ -48,13 +48,13 @@ kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file
 
     Context|Field|Description
     -------|-----|-----------
-    Cluster|*namespace*|Use Aqua's namespace
-    Cluster|*service account|Use Aqua's service account
-    Database|*INPUT_PROPERTIES_PASSWORD*|Point to Aqua's db password secret
-    Database|*INPUT_PROPERTIES_HOST*|Point to the Aqua's DB service
-    Database|*COMMON_STORAGE_PROPERTIES_HOST*|Point to Aqua's DB service
-    OpsGenie|*OUTPUT_PROPERTIES_ALERTRESPONDERS*|Set OpsGenie *Responders* field *(see at https://docs.opsgenie.com/docs/alert-api)*
-    OpsGenie|*OUTPUT_PROPERTIES_ALERTVISIBLETO*|Set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
+    Cluster|**namespace**|Use Aqua's namespace
+    Cluster|**service account**|Use Aqua's service account
+    Database|**INPUT_PROPERTIES_PASSWORD**|Point to Aqua's db password secret
+    Database|**INPUT_PROPERTIES_HOST**|Point to the Aqua's DB service
+    Database|**COMMON_STORAGE_PROPERTIES_HOST**|Point to Aqua's DB service
+    OpsGenie|**OUTPUT_PROPERTIES_ALERTRESPONDERS**|Set OpsGenie *Responders* field *(see at https://docs.opsgenie.com/docs/alert-api)*
+    OpsGenie|**OUTPUT_PROPERTIES_ALERTVISIBLETO**|Set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
 
 
 6. Push the OpsGeini plugin to the cluster :
@@ -67,7 +67,7 @@ To validate the integration check the logs of the plugin
 ```
 kubectl logs aqua-lc-opsgenie-<pod-unique-code> -n aqua
 ```
-For support and questions please contact us at - community.plugins@aquasec.com.
+For support and questions please contact us at - **community.plugins@aquasec.com**
 
 ### Disclaimer 
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
