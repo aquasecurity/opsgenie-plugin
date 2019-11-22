@@ -11,10 +11,10 @@ Aqua opens the following security ticket types:
 
 Context|Ticket type
 ----|-------
-Scanning and vulnerabilities management|Images that failed the security scans and are non-compliant
-Scanning and vulnerabilities management|Hosts that failed the security scans and are non-compliant
-Assurance Gateway|Attempts to push non-complaint or unregistered images to the runtime environment
-Runtime incidents|Suspicious or unauthorized activity in the container
+Scanning|Images that failed the security scans and are non-compliant
+Scanning|Hosts that failed the security scans and are non-compliant
+Assurance Gateway|Attempts to push non-complaint or unregistered images to the cluster
+Runtime incidents|Suspicious or unauthorized activity in a container
 Runtime incidents|Suspicious or unauthorized network activity at a container level
 
 _Example: Image Failed Assurance Policy_
