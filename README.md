@@ -18,38 +18,38 @@ Runtime|Suspicious or unauthorized activity in a container
 Runtime|Suspicious or unauthorized network activity at a container level
 
 _Example: Image Failed Assurance Policy_
-![CloudFormation](/images/cloudformation.jpg)
+![Image ticket](/images/imagefailed.jpg)
 
 _Example: Unauthorized File Execution Detected_
-![CloudFormation](/images/cloudformation.jpg)
+![Runtime ticket](/images/runtimeticket.jpg)
 
 
 ### Implementation Requirements
-- An OpsGenie Account 
+- OpsGenie Account 
 - OpsGenie API Key for the integration (see at https://docs.opsgenie.com/docs/api-key-management) 
 - Access to Aqua's CSP Kubenetes cluster 
 
 ### Deploying the OpsGenie plugin
-1. Clone the GitHub OpsGenie repository in your working environment:  
+1. Clone the GitHub OpsGenie repository in your working environment  
 ```
-git@github.com:aquasecurity/opsgenie-plugin.git|
+git clone git@github.com:aquasecurity/opsgenie-plugin.git|
 ```
-2. If you want to make changes to the ticket messages you can update the message template files at */<<epo>/lc*
+2. You can changes the default tickets language in the template files at */<repo>/lc*
 
 3. Create a new *secret* to hold the OpsGenie API Key code
 ```
-kubectl create secret -n <<aqua namespace>> generic lc-secrets --from-literal=opsgenie-apikey=[key]
+kubectl create secret -n <aqua namespace> generic lc-secrets --from-literal=opsgenie-apikey=<opsgenie-integration-key>
 ```  
-4. Create a *configmap* based on the local messages and configurations
+4. Create a *configmap* from the local messages and configurations
 ```
-kubectl create configmap aqua-lc-opsgenie-config -n *<aua namespace>* --from-file=./lc/
+kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file=./lc/
 ```	
-5. Edit the OpsGenie deployment template to configure the plug-in behavior -
+5. Configure OpsGenie behavior be editing the Kubernetes deployment yaml template -
 - Copy opsgenie_deployment_template.yaml to opsgenie_deployment.yaml and change the following parameters -
 - *namespace* - use Aqua's namespace
 - *service account* - use Aqua's service account
 #### Database configuration 
-- *INPUT_PROPERTIES_PASSWORD* - point to the correct Aqua's db password secret
+- *INPUT_PROPERTIES_PASSWORD* - point to Aqua's db password secret
 - *INPUT_PROPERTIES_HOST* - point to the Aqua's DB service
 - *COMMON_STORAGE_PROPERTIES_HOST* - point to Aqua's DB service
 #### OpsGenie configurations
