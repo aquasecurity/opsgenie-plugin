@@ -1,13 +1,11 @@
-{{define "runtime" -}}
-
-
 {{- $host := .event.Resolve "$.hostname" -}}
 {{- $resource := .event.Resolve "$.data.resource" -}}
 {{- $result := .event.Resolve "$.result" -}}
 {{- $user := .event.Resolve "$.userid" -}}
 {{- $container := .event.Resolve "$.containername" -}}
+{{- $eventaction := "detected" -}}
 
-{
+
 {{if eq (.event.Resolve "$.result") 2}}
    {{$eventaction := "blocked"}}
 {{else if eq (.event.Resolve "$.result") 3}}
@@ -16,21 +14,19 @@
    {{$eventaction := "detected"}}
 {{end}}
 
-{{if eq (.event.Resolve "$.action) "exec"}}
-   "message" : "Unauorized file execution {{$$eventaction}}",
-   "Description": "User {{$user}} performed unauthorized file exec ({{$resource}}) on host {{$host}}. Action {{$$eventaction}}",
-{{else if eq (.event.Resolve "$.category) "network"}}
-   "message" : "Unauorized network activity {{$$eventaction}}",
-   "Description": "User {{$user} performed unauthorized network connection with resource {{$resource}} on cntainer {{$container}} on host {{$host}}, Action {{$$eventaction}}",
+{
+{{if eq (.event.Resolve "$.action") "exec"}}
+   "message" : "Unauthorized file execution {{$eventaction}}",
+   "description": "User {{$user}} performed unauthorized file exec ({{$resource}}) on host {{$host}} on cntainer {{$container}}. Action {{$eventaction}}",
+   "alias": "{{.event.Resolve "$.containername"}} | Runtime | {{$resource}}",
+{{else if eq (.event.Resolve "$.category") "network"}}
+   "message" : "Unauthorized network activity {{$eventaction}}",
+   "description": "User {{$user}} performed unauthorized network connection with resource {{$resource}} on cntainer {{$container}} on host {{$host}}. Action {{$eventaction}}",
+   "alias": "{{.event.Resolve "$.containername"}} | Network | {{$resource}}",
 {{else}}
    "message": "Runtime container alert (category: {{.event.Resolve "$.category"}}, result: {{.event.Resolve "$.result"}})",
-   "Description": "User {{$user} performed unauthorized runtime activity with resource {{$resource}} on cntainer {{$container}} on host {{$host}}",
-{{end}}
-
-{{if (.event.Resolve "$.containername")}}
-  "alias": "{{.event.Resolve "$.containername"}}",
-{{else}}
-  "alias": "{{.event.Resolve "$.imagename"}}",
+   "description": "User {{$user}} performed unauthorized runtime activity with resource {{$resource}} on cntainer {{$container}} on host {{$host}}",
+   "alias": "{{.event.Resolve "$.containername"}} | Runtime | {{.event.Resolve "$.imagename"}}" 
 {{end}}
 
 {{if .responders}}
@@ -74,6 +70,5 @@
 {{else}}
   "priority":"P3"
 {{end}}
-}
 
-{{end -}}
+}

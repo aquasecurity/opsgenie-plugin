@@ -2,12 +2,12 @@
   "message": "Image failed assurance policy",
 
 {{if (.event.Resolve "$.containername")}}
-  "alias": "{{.event.Resolve "$.containername"}}",
+  "alias": "{{.event.Resolve "$.containername"}} | Assurance",
 {{else}}
-  "alias": "{{.event.Resolve "$.imagename"}}",
+  "alias": "{{.event.Resolve "$.imagename"}} | Assurance",
 {{end}}
 
-  "description":"Image {{.event.Resolve "$.imagename"}} failed to pass assurance policy",
+  "description":"Image {{.event.Resolve "$.imagename"}} failed to pass assurance policy due to the following controls: {{.event.Resolve "$.data.controls"}}",
 
 {{if .responders}}
   "responders":[

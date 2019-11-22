@@ -10,7 +10,7 @@
       "password": "",
       "table": "",
       "orderColumn": "id",
-      "where": "((type='Docker' and result>1 and category='image') or (type='Runtime' and result>1)  or (type='CVE' and result>1 and category='CVE') or (userid='image.policy' and result>1 and action='policy.failure') or (userid='host.policy' and result>1 and action='policy.failure'))",
+      "where": "((type='Docker' and result>1 and category='container') or (type='Runtime' and result>1)  or (type='CVE' and result>1 and category='CVE') or (userid='image.policy' and result>1 and action='policy.failure') or (userid='host.policy' and result>1 and action='policy.failure'))",
       "selectInterval": 2000,
       "selectLimit": 1,
       "ensureConsistency": true

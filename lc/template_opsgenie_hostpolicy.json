@@ -1,8 +1,9 @@
 {
   "message": "Host failed assurance policy",
-  "alias": "{{.event.Resolve "$.hostname"}}",
+  "alias": "{{.event.Resolve "$.imagename"}} | Assurance",
 
-  "description":"Host {{.event.Resolve "$.userid"}}  {{.event.Resolve "$.hostname"}} failed to pass assurance policy",
+  "description":"Host {{.event.Resolve "$.imagename"}} failed to pass assurance policy due to the following controls: {{.event.Resolve "$.data.controls"}}",
+  
 
 {{if .responders}}
   "responders":[

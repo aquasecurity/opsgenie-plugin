@@ -1,14 +1,14 @@
 {
-{{if and (eq (.event.Resolve "$.action") "policy.failure") (eq (.event.Resolve "$.result") 2)}}
+{{if and (eq (.event.Resolve "$.action") "start") (eq (.event.Resolve "$.result") 2)}}
   "message": "Non-compliant image blocked",
   "description":"Blocked non-compliant image {{.event.Resolve "$.imagename"}}",
-{{else if and (eq (.event.Resolve "$.action") "policy.failure") (eq (.event.Resolve "$.result") 3)}}
+{{else if and (eq (.event.Resolve "$.action") "start") (eq (.event.Resolve "$.result") 3)}}
   "message": "Non-compliant image detected",
   "description":"Detected non-compliant image {{.event.Resolve "$.imagename"}}",
-{{else if and (eq (.event.Resolve "$.action") "reallow") (eq (.event.Resolve "$.result") 2)}}
+{{else if and (eq (.event.Resolve "$.action") "start") (eq (.event.Resolve "$.result") 2)}}
   "message": "Unregistered image blocked",
   "description":"Blocked unregistered image {{.event.Resolve "$.imagename"}}",
-{{else if and (eq (.event.Resolve "$.action") "reallow") (eq (.event.Resolve "$.result") 3)}}
+{{else if and (eq (.event.Resolve "$.action") "start") (eq (.event.Resolve "$.result") 3)}}
   "message": "Unregistered image detected",
   "description":"Detected unregistered image {{.event.Resolve "$.imagename"}}",
 {{else}}
@@ -16,11 +16,7 @@
   "description": "Docker image alert (action: {{.event.Resolve "$.action"}}, result: {{.event.Resolve "$.result"}})",
 {{end}}
 
-{{if (.event.Resolve "$.containername")}}
-  "alias": "{{.event.Resolve "$.containername"}}",
-{{else}}
-  "alias": "{{.event.Resolve "$.imagename"}}",
-{{end}}
+  "alias": "{{.event.Resolve "$.imagename"}} | Non-compliant",
 
 {{if .responders}}
   "responders":[
