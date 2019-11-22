@@ -9,13 +9,13 @@ The OpsGenie plugin extends Aqua CSP with the ability to open tickets in your Op
 ### Tickets types sent to OpsGenie -
 Aqua opens the following security ticket types -
 
-|----|-------|
-|Scanning and vulnerabilities management|Images that failed the security scans and are non-compliant|
-|Scanning and vulnerabilities management|Hosts  that failed the security scans and are non-compliant|
-|Assurance Gateway|Attempts to push non-complaint or unregistered images to the runtime environment|
-|Runtime incidents|Suspicious or unauthorized activity in the container|
-|Runtime incidents|Suspicious or unauthorized network activity at a container level|
-|----|-------|
+----|-------
+Scanning and vulnerabilities management|Images that failed the security scans and are non-compliant
+Scanning and vulnerabilities management|Hosts  that failed the security scans and are non-compliant
+Assurance Gateway|Attempts to push non-complaint or unregistered images to the runtime environment
+Runtime incidents|Suspicious or unauthorized activity in the container
+Runtime incidents|Suspicious or unauthorized network activity at a container level
+----|-------
 
 _Example: Image Failed Assurance Policy_
 ![CloudFormation](/images/cloudformation.jpg)
@@ -31,7 +31,7 @@ _Example: Unauthorized File Execution Detected_
 
 ### Deploying the OpsGenie plugin
 1. Clone the GitHub OpsGenie repository in your working environment:  
-> git@github.com:aquasecurity/opsgenie-plugin.git
+|git@github.com:aquasecurity/opsgenie-plugin.git|
 
 2. If you want to make changes to the ticket messages you can update the message template files at */<<epo>/lc*
 
