@@ -18,7 +18,7 @@ Runtime|Suspicious or unauthorized activity in a container
 Runtime|Suspicious or unauthorized network activity at a container level
 
 _Example: Image Failed Assurance Policy_
-![Image ticket](/images/imagefailed.jpg)
+![Host ticket](/images/imagefailed.jpg)
 
 _Example: Unauthorized File Execution Detected_
 ![Runtime ticket](/images/runtimeticket.jpg)
