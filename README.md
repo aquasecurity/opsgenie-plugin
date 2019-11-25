@@ -1,10 +1,10 @@
-# Aqua OpsGenie Plugin
+# Aqua OpsGenie Plug-in
 ## Send Aqua's security issues to OpsGenie
 
-> _OpsGenie Plugin is compatible with Aqua Cloud Native Security Platform 4.x_
+> _OpsGenie Plug-in is compatible with Aqua Cloud Native Security Platform 4.x_
 
 ### Description
-The OpsGenie plugin extends Aqua CSP with the ability to open tickets in your OpsGenie account. The plugin is delivered as an image that should be pushed into the Aqua CSP Kubernetes cluster. Configuring the plug-in is done through the deployment yaml file. 
+The OpsGenie plug-in extends Aqua CSP with the ability to open tickets in your OpsGenie account. The plug-in is delivered as an image that should be pushed into the Aqua CSP Kubernetes cluster. Configuring the plug-in is done through the deployment yaml file. 
 
 ### Tickets types sent to OpsGenie -
 Aqua opens the following security ticket types:
@@ -13,9 +13,9 @@ Context|Ticket type
 ----|-------
 Scanning|Images that failed the security scans and are non-compliant
 Scanning|Hosts that failed the security scans and are non-compliant
-Assurance|Attempts to push non-complaint or unregistered images to the cluster
+Assurance|Attempts to push non-compliant or unregistered images to the cluster
 Runtime|Suspicious or unauthorized activity in a container
-Runtime|Suspicious or unauthorized network activity at a container level
+Runtime|Suspicious or unauthorized network activity at the container level
 
 _Example: Host Failed Assurance Policy_
 ![Host ticket](/images/imagefailed.jpg)
@@ -29,12 +29,12 @@ _Example: Unauthorized File Execution Detected_
 - OpsGenie API Key for the integration (see at https://docs.opsgenie.com/docs/api-key-management) 
 - Access to Aqua's CSP Kubenetes cluster 
 
-### Deploying the OpsGenie plugin
+### Deploying the OpsGenie plug-in
 1. Clone the GitHub OpsGenie repository in your working environment  
 ```
 git clone git@github.com:aquasecurity/opsgenie-plugin.git|
 ```
-2. You can changes the default tickets language in the template files at **./lc/**
+2. You can change the default tickets language in the template files at **./lc/**
 
 3. Create a new **secret** to hold the OpsGenie API Key code
 ```
@@ -57,13 +57,13 @@ kubectl create configmap aqua-lc-opsgenie-config -n <aqua namespace> --from-file
     OpsGenie|**OUTPUT_PROPERTIES_ALERTVISIBLETO**|Set OpsGenie *Visible To* field *(see at https://docs.opsgenie.com/docs/alert-api)*
 
 
-6. Push the OpsGeini plugin to the cluster :
+6. Push the OpsGenie plug-in to the cluster :
 ```
 kubectl create -f opsgenie_deployment.yaml
 ```	
 
 ### Troubleshooting and Support
-To validate the integration check the logs of the plugin
+To validate the integration check the logs of the plug-in
 ```
 kubectl logs aqua-lc-opsgenie-<pod-unique-code> -n aqua
 ```
