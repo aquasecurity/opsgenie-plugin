@@ -32,7 +32,7 @@ _Example: Unauthorized File Execution Detected_
 ### Deploying the OpsGenie plug-in
 1. Clone the GitHub OpsGenie repository in your working environment  
 ```
-git clone git@github.com:aquasecurity/opsgenie-plugin.git|
+git clone git@github.com:aquasecurity/opsgenie-plugin.git
 ```
 2. You can change the default tickets language in the template files at **./lc/**
 
