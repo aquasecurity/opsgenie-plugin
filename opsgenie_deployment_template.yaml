@@ -62,7 +62,7 @@ spec:
             secretKeyRef:
               name: "lc-secrets"
               key: "opsgenie-apikey"
-#         value: "41094637-4f91-4a72-aa0d-06cd29c8432f"
+#         value: LICENSE KEY
         - name: "OUTPUT_PROPERTIES_OPSGENIEAPIALERTURL"
           value: "https://api.opsgenie.com/v2/alerts"
           ##
